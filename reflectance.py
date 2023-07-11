@@ -2,6 +2,8 @@ import astropy.io.fits as fits
 import glob
 import os
 import fnmatch
+import numpy as np
+import astropy.units as u
 
 class Spectrum():
     '''
@@ -30,7 +32,7 @@ class Spectrum():
     # def load_phoenix_model(self, )
         
 
-    def load_phoenix_model(path=None, lambda_start, lambda_end):
+    def load_phoenix_model(lambda_start, lambda_end,steff,path=None):
         '''
         Read in a phoenix spectrum
         '''
@@ -38,12 +40,12 @@ class Spectrum():
         # Prompt the user to specify a path if none is given
         if path is None:
             path = input('Specify a path to your PHOENIX model (directory containing wavels + fluxes): \n')
-
-        hdulist = fits.open(path + 'lte*.fits')
+        teff =str(int(steff)).zfill(5)
+        path_use = path + 'lte%s-4.50-0.0.PHOENIX-ACES-AGSS-COND-2011-HiRes.fits'%(teff)
+        f = fits.open(path_use)
         spec = f[0].data / (1e8) # ergs/s/cm2/cm to ergs/s/cm2/Angstrom for conversion
         f.close()
         
-        path = path.split('/')
         f = fits.open(path + 'WAVE_PHOENIX-ACES-AGSS-COND-2011.fits')
         lam = f[0].data # angstroms
         f.close()
@@ -53,7 +55,7 @@ class Spectrum():
         spec *= conversion_factor # phot/cm2/s/angstrom
         
         # Take subarray requested
-        isub = np.where( (lam > wav_start*10.0) & (lam < wav_end*10.0))[0]
+        isub = np.where( (lam > lambda_start*10.0) & (lam < lambda_end*10.0))[0]
 
         # Convert 
         return lam[isub]/10.0,spec[isub] * 10 * 100**2 #nm, phot/m2/s/nm
