@@ -4,6 +4,7 @@ import os
 import fnmatch
 import numpy as np
 import astropy.units as u
+import astropy.constants as cons
 
 class Spectrum():
     '''
@@ -60,4 +61,26 @@ class Spectrum():
         # Convert 
         return lam[isub]/10.0,spec[isub] * 10 * 100**2 #nm, phot/m2/s/nm
 
+    def cal_refflux_pl(d_star_earth,host_spec,r_star,r_planet,a_planet, albedo,wvl):
+        '''
+        Calculation about reflected flux from planet
+        '''
+        wvl *= u.nm
+        ph_energy = ((cons.h * cons.c / (wvl) ) /u.ph).to(u.J / u.ph)
+
+        host_spec_J = (host_spec* u.ph / (u.m**2 * u.s * u.nm) * ph_energy).to(u.J / (u.m**2 * u.s * u.nm))
+
+        lum_star = host_spec_J * 4 * np.pi * r_star**2
+
+        # flux of star on planet
+        flux_sp = lum_star / (4 * np.pi * a_planet**2)
+
+        lum_planet = flux_sp * r_planet**2 * np.pi * albedo
+
+        flux_planet = lum_planet / (4 * np.pi * d_star_earth**2)
+
+        flux_planet_ph = (flux_planet / ph_energy).to(u.ph / (u.m**2 * u.s * u.nm))
+
+        # Convert 
+        return flux_planet_ph #nm, phot/m2/s/nm
         
