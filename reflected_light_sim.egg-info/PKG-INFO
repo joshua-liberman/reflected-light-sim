@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: reflected-light-sim
+Version: 0.1
+Summary: reflected-light-sim: a simulator for reflected light of planet
+Home-page: https://github.com/jlibermann/reflected-light-sim/tree/main
+Author: Josh+Huihao
+License: MIT
+Keywords: Reflectance Astronomy
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Astronomy
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+License-File: LICENSE
