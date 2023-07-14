@@ -33,9 +33,21 @@ class Spectrum():
         
 
     def load_phoenix_model(lambda_start, lambda_end,steff,path=None):
-        '''
-        Read in a phoenix spectrum
-        '''
+        """Load a PHOENIX Stellar Model
+
+        Loads a stellar PHOENIX model given a starting + ending wavelength, an effective temperature, and a path to the model.
+
+        Args:
+            lambda_start (int): Starting wavelength value
+            lambda_end (int): Ending wavelength value
+            steff (int): Stellar effective temperature
+            path (str, optional): Path to the PHOENIX model directory. Defaults to None.
+
+        Returns:
+            lam (array) : The wavelength array from the PHOENIX model.
+            spec (array): The flux array from the PHOENIX model.
+
+        """
        
         # Prompt the user to specify a path if none is given
         if path is None:
@@ -61,9 +73,21 @@ class Spectrum():
         return lam[isub]/10.0,spec[isub] * 10 * 100**2 #nm, phot/m2/s/nm
 
     def cal_refflux_pl(d_star_earth,host_spec,r_star,r_planet,a_planet, albedo,wvl):
-        '''
-        Calculation about reflected flux from planet
-        '''
+         """Calculate the reflected flux from a planet.
+
+        Args:
+            d_star_earth (int): Star-Earth distance (parsecs)
+            host_spec (array): Flux array from host star model.
+            r_star (int): Stellar radius ($R_{\odot}$)
+            r_planet (int): Planet radius ($R_{Jup})
+            a_planet (int): Planet semi-major axis (AU)
+            albedo (float): Planet albedo.
+            wvl (array): Wavelength array from host star model.
+
+        Returns:
+            flux_planet_ph (array): An array of reflected planet fluxes.
+
+        """
         wvl *= u.nm
         ph_energy = ((cons.h * cons.c / (wvl) ) /u.ph).to(u.J / u.ph)
 
