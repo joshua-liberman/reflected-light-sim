@@ -1,5 +1,5 @@
 # reflected-light-sim
-Calculates reflected light from a planet given a stellar PHOENIX model and planet albedo (developed as part of the 2023 CodeAstro workshop).\\
+Calculates reflected light from a planet given a stellar PHOENIX model and planet albedo (developed as part of the 2023 CodeAstro workshop).\
 ![Code Astro](https://img.shields.io/badge/Made%20at-Code/Astro-blueviolet.svg)
 [![Documentation Status](https://readthedocs.org/projects/reflected-light-sim/badge/?version=latest)](http://reflected-light-sim.readthedocs.io/en/latest/?badge=latest)
 [![PyPI version](https://badge.fury.io/py/reflected-light-sim.svg)](https://badge.fury.io/py/reflected-light-sim)
