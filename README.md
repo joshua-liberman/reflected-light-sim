@@ -8,7 +8,7 @@ Calculates reflected light from a planet given a stellar PHOENIX model and plane
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Installation Instructions
-To install the package, run `pip install reflected-light-sim`.
+To install the package, run `pip install reflected_light_sim`
 
 ## Simulation Flowchart
 ![Flowchart](codeastroflowchart.png)
