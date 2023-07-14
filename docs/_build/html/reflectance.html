@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reflectance Functions &mdash; reflected-light-sim 0.1.0-alpha documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            reflected-light-sim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Reflectance Functions</a><ul>
+<li><a class="reference internal" href="#reflectance.Spectrum"><code class="docutils literal notranslate"><span class="pre">Spectrum</span></code></a><ul>
+<li><a class="reference internal" href="#reflectance.Spectrum.cal_refflux_pl"><code class="docutils literal notranslate"><span class="pre">Spectrum.cal_refflux_pl()</span></code></a></li>
+<li><a class="reference internal" href="#reflectance.Spectrum.load_phoenix_model"><code class="docutils literal notranslate"><span class="pre">Spectrum.load_phoenix_model()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">reflected-light-sim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Reflectance Functions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/reflectance.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="reflectance-functions">
+<span id="reflectance"></span><h1>Reflectance Functions<a class="headerlink" href="#reflectance-functions" title="Permalink to this heading"></a></h1>
+<p>Functions to load a stellar model and calculate planet reflectance.</p>
+<span class="target" id="module-reflectance"></span><dl class="py class">
+<dt class="sig sig-object py" id="reflectance.Spectrum">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">reflectance.</span></span><span class="sig-name descname"><span class="pre">Spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wvs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reflectance.Spectrum" title="Permalink to this definition"></a></dt>
+<dd><p>A class for spectra manipulation (based on PSI Sim’s spectrum.py class).</p>
+<p>The main properties will be:
+wvs    - sampled wavelengths (np.array of floats, in microns)
+spectrum    - current flux values of the spectrum (np.array of floats, [photons/s/cm^2/A])
+R   - spectral resolution (float)</p>
+<p>The main functions will be:
+load_phoenix_model      - load a PHOENIX model
+calculate_reflected_light  -calculate the reflected light from a planet</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="reflectance.Spectrum.cal_refflux_pl">
+<span class="sig-name descname"><span class="pre">cal_refflux_pl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host_spec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_star</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_planet</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_planet</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">albedo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wvl</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reflectance.Spectrum.cal_refflux_pl" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the reflected flux from a planet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d_star_earth</strong> (<em>int</em>) – Star-Earth distance (parsecs)</p></li>
+<li><p><strong>host_spec</strong> (<em>array</em>) – Flux array from host star model.</p></li>
+<li><p><strong>r_star</strong> (<em>int</em>) – Stellar radius ($R_{odot}$)</p></li>
+<li><p><strong>r_planet</strong> (<em>int</em>) – Planet radius ($R_{Jup})</p></li>
+<li><p><strong>a_planet</strong> (<em>int</em>) – Planet semi-major axis (AU)</p></li>
+<li><p><strong>albedo</strong> (<em>float</em>) – Planet albedo.</p></li>
+<li><p><strong>wvl</strong> (<em>array</em>) – Wavelength array from host star model.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of reflected planet fluxes.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>flux_planet_ph (array)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reflectance.Spectrum.load_phoenix_model">
+<span class="sig-name descname"><span class="pre">load_phoenix_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lambda_end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reflectance.Spectrum.load_phoenix_model" title="Permalink to this definition"></a></dt>
+<dd><p>Load a PHOENIX Stellar Model</p>
+<p>Loads a stellar PHOENIX model given a starting + ending wavelength, an effective temperature, and a path to the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lambda_start</strong> (<em>int</em>) – Starting wavelength value</p></li>
+<li><p><strong>lambda_end</strong> (<em>int</em>) – Ending wavelength value</p></li>
+<li><p><strong>steff</strong> (<em>int</em>) – Stellar effective temperature</p></li>
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the PHOENIX model directory. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The wavelength array from the PHOENIX model.
+spec (array): The flux array from the PHOENIX model.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>lam (array)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Joshua Liberman, Huihao Zhang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

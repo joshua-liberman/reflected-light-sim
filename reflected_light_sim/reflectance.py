@@ -73,7 +73,7 @@ class Spectrum():
         return lam[isub]/10.0,spec[isub] * 10 * 100**2 #nm, phot/m2/s/nm
 
     def cal_refflux_pl(d_star_earth,host_spec,r_star,r_planet,a_planet, albedo,wvl):
-         """Calculate the reflected flux from a planet.
+        """Calculate the reflected flux from a planet.
 
         Args:
             d_star_earth (int): Star-Earth distance (parsecs)
